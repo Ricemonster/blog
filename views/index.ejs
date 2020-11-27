@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ricemonster</title>
+    <link rel='stylesheet' href='/stylesheets/normalize.css' />
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+  </head>
+  <body>
+    <div id="box">
+      <%- include('./left.ejs') %>
+      <div class="boxDiv">
+        <!-- 首页按时间排列所有网志 -->
+         <%if(state==0) { %>
+          <div class="item" style="margin-top: 20px；">
+            <% list.forEach(function(item){%>
+              <div class="itema">
+                <a class="itemLista" href="">
+                  <div class="post-item">
+                    <div>
+                      <div id="title" style="font-size: 30px;"><%= item.title %> </div>
+                      <div id="intime" style="margin-top: 20px;font-size: 16px;"><%= item.intime %> </div>
+                    </div>
+                    <img style="height: 120px;width: 230px;" src="<%= item.imgUrl %>" alt="">
+                  </div>
+                </a>
+              </div>
+            <% }) %>
+          </div>
+          <% } %> 
+      </div>
+      <%- include('./right.ejs') %>
+    </div>
+    <script crossorigin="anonymous" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" src="https://lib.baomitu.com/jquery/3.5.1/jquery.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
