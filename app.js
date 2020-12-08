@@ -6,10 +6,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require('body-parser')
 
-
-
-
-
 // !连接数据库并使用
 const mongoose = require('mongoose')
 require('dotenv').config() // 加载环境变量
@@ -34,12 +30,16 @@ const blogRouter = require('./routes/blog'); // 网志
 const categoriesRouter = require('./routes/categories'); // 分类
 const tagsRouter = require('./routes/tags'); // 标签
 const aboutmeRouter = require('./routes/aboutme'); // 关于我
+
+// 后台路由
+const adminRouter = require('./routes/admin')
 // 路由注册
 app.use('/', indexRouter);
 app.use('/blog', blogRouter);
 app.use('/categories',categoriesRouter);
 app.use('/tags',tagsRouter);
 app.use('/about',aboutmeRouter);
+app.use('/admin',adminRouter);
 
 // ! ejs模板引擎
 app.set('views', path.join(__dirname, 'views'));
@@ -66,5 +66,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// 跨域设置
+app.all('*', (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By",' 3.2.1')
+  res.header("Content-Type", "application/json;charset=utf-8");
+  next();
+});
+
 
 module.exports = app;
