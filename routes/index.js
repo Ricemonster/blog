@@ -7,7 +7,6 @@ const BlogController = require('../controller/blogController');
 router.get('/', function(req, res, next) {
   // awaite 返回的是 promise 所有需要 then 来接收
   BlogController.index().then(resa=>{
-    console.log(resa)
     res.render('index',{state:0,list:resa})
   })
 });

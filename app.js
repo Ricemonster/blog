@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require('body-parser')
+const exphbs = require('express-handlebars')
 
 // !连接数据库并使用
 const mongoose = require('mongoose')

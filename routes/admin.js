@@ -1,6 +1,7 @@
  var express = require('express');
 const { route } = require('.');
 var router = express.Router();
+const BlogController = require('../controller/blogController');
 
 router.get('/',function(req,res,next){
     res.render('admin/login')
@@ -21,8 +22,17 @@ router.post('/login',function(req,res,next){
         })
     }
 })
+
+
+
+// 文章渲染
 router.get('/index',function(req,res,next){
     res.render('admin/index')
 })
+router.get('/allblog',function(req,res,next){
+    BlogController.index().then(resa=>{
+      res.render('admin/order-list',{list:resa})
+    })
+})  
 
 module.exports = router;
