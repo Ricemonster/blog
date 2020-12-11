@@ -34,5 +34,10 @@ router.get('/allblog',function(req,res,next){
       res.render('admin/order-list',{list:resa})
     })
 })  
+router.get('/createbook',function(req,res,next){
+    res.render('admin/createbook')
+})
+
+
 
 module.exports = router;

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/xadmin.css">
+</head>
+<style>
+    .blogtitle{
+        margin-top: 20px;
+    }
+    .layui-input-block{
+        width: 70%;
+    }
+</style>
+<body>
+
+    <form class="layui-form" action="" style="margin-top:20px">
+        <div class="layui-form-item">
+          <label class="layui-form-label">输入框</label>
+          <div class="layui-input-block">
+            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <button style="margin-left:50px;margin-bottom:20px;" type="button" class="layui-btn" id="TextimgUrl">
+            <i class="layui-icon">&#xe67c;</i>上传封面图
+        </button>
+        <div style="margin-left: 50px;" id="editor"></div>
+        <div style="margin-top:30px;" class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+          </div>
+      </form>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+<script src="../lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/iceuinet/iceEditor/src/iceEditor.min.js"></script>
+<!-- 富文本JS模块 -->
+<script>
+//第一步：创建实例化对象
+var e = new ice.editor('editor');
+// console.log(e.getText());  //获取Text格式内容
+// console.log(e.getValue());  //同getHTML，只是为了好记
+e.width='80%';   //宽度
+e.height='500px';  //高度
+
+//第二步：配置图片或附件上传提交表单的路径
+//如果你的项目使用的php开发，可直接使用upload.php文件
+//其它的编程语言需要你单独处理，后期我会放出.net java等语言代码
+//具体与你平常处理multipart/form-data类型的表单一样
+//唯一需要注意的就是：处理表单成功后要返回json格式字符串，不能包含其它多余的信息：
+//url：文件的地址
+//name：文件的名称（包含后缀）
+//error：上传成功为0，其它为错误信息，将以弹窗形式提醒用户
+//例如批量上传了两张图片：
+//[
+//	{url:'/upload/img/153444.jpg', name:'153444.jpg', error:0},
+//	{url:'/upload/img/153445.jpg', name:'153445.jpg', error:'禁止该文件类型上传'}
+//]
+e.uploadUrl="/iceEditor/src/upload.php";
+
+//第三步：配置菜单（默认加载全部，无需配置）
+e.menu = [
+  'backColor',                 //字体背景颜色
+  'fontSize',                  //字体大小
+  'foreColor',                 //字体颜色
+  'bold',                      //粗体
+  'italic',                    //斜体
+  'underline',                 //下划线
+  'strikeThrough',             //删除线
+  'justifyLeft',               //左对齐
+  'justifyCenter',             //居中对齐
+  'justifyRight',              //右对齐
+  'indent',                    //增加缩进
+  'outdent',                   //减少缩进
+  'insertOrderedList',         //有序列表
+  'insertUnorderedList',       //无序列表
+  'superscript',               //上标
+  'subscript',                 //下标
+  'createLink',                //创建连接
+  'unlink',                    //取消连接
+  'hr',                        //水平线
+  'table',                     //表格
+  'files',                     //附件
+  'music',                     //音乐
+  'video',                     //视频
+  'insertImage',               //图片
+  'removeFormat',              //格式化样式
+  'code',                      //源码
+  'line'                       //菜单分割线
+];
+
+//第四步：创建
+e.create();
+</script>
+<!-- 表单处理模块 - 图片，文章标题 ，分类-->
+<script>
+layui.use('form', function(){
+var form = layui.form;
+  //监听提交
+form.on('submit(formDemo)', function(data){
+    let title = data.field.title
+    var now = new Date();                                                                                                     
+    var year = now.getFullYear(); //得到年份
+    var month = now.getMonth();//得到月份
+    var date = now.getDate();//得到日期
+    month = month + 1;
+    if (month < 10) month = "0" + month;
+    if (date < 10) date = "0" + date;
+    let time = year + "-" + month + "-" + date;    //（格式化"yyyy-MM-dd"）  
+    // 传递到后台
+    axios.post('http://localhost:3000/', {
+        title: title,
+        intime: time
+    })
+    .then(function (res) {
+        layer.msg('文章创建成功');
+    })
+    .catch(function (err) {
+        console.log('客户端错误',err);
+    });
+    console.log(e.getHTML(),time);  //获取HTML格式内容
+   });
+});
+layui.use('upload', function(){
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#TextimgUrl' //绑定元素
+            ,url: '/upload/' //上传接口
+            ,data:{
+                title: '文章标题'
+            }
+            ,done: function(res){
+            //上传完毕回调
+            console.log("上传成功")
+            }
+            ,error: function(){
+            //请求异常回调
+            console.log('上传失败')
+            }
+        });
+});
+// 获取内容
+
+</script>
+</body>
+
+</html>
