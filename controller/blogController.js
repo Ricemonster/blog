@@ -30,14 +30,15 @@ class BlogController{
     }
     // 删除一篇文章 - 查询_id
     async Deleteblog(id) {
-        let success = await BlogSchema.remove(id,function(err){
-            if(err){
-                console.log(err)
-            }else{
-                console.error("用户删除成功")
+        let success = await BlogSchema.deleteOne({_id:id},function(err){
+            if(err){}else{
+
             }
+            if(err) return "数据删除发生错误"
+            else return "数据删除成功"
         })
         console.log(success)
+        return success
     }
 
 }

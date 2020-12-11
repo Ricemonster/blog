@@ -9,7 +9,7 @@ const BlogController = require('../controller/blogController');
 router.delete('/',async function(req,res,next){
   let id = req.body.id // 文章id
   let rss = await BlogController.Deleteblog(id);
-
+  res.send(rss)
 })
 
 
