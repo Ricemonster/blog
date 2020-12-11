@@ -1,5 +1,4 @@
 const BlogSchema = require('../models/Blog.js')
-
 class BlogController{
     async index(){
         let Blog =  await BlogSchema.find((res,err)=>{
@@ -29,6 +28,18 @@ class BlogController{
         let resa = await articles.save()
         return resa
     }
+    // 删除一篇文章 - 查询_id
+    async Deleteblog(id) {
+        let success = await BlogSchema.remove(id,function(err){
+            if(err){
+                console.log(err)
+            }else{
+                console.error("用户删除成功")
+            }
+        })
+        console.log(success)
+    }
+
 }
 
 module.exports = new BlogController()

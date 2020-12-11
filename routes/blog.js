@@ -1,24 +1,19 @@
-/**
- * 网志
- */
+/** 
+ * !处置所有关于网志的操作 - 添加 删除 更新 修改 
+*/ 
 var express = require('express');
-const { route } = require('.');
 var router = express.Router();
+const BlogController = require('../controller/blogController');
 
-router.all('/',(res,req,next)=>{
-  res.send('显示全部网志');
+// ! 删除一篇文章
+router.delete('/',async function(req,res,next){
+  let id = req.body.id // 文章id
+  let rss = await BlogController.Deleteblog(id);
+
 })
-router.all('/:blogname',function(req,res,next){
-  // 拦截器，因为express会有优先使用靠前的路由，可以使用next来跳到下一条规则
-  next();
-})
-router.get('/:blogname', function(req, res, next) {
-  let blogname = req.params.blogname
-  if(blogname == 'blog'){
-    res.send('显示全部网志')
-  }else{
-    res.send(blogname)
-  }
-});
+
+
+
+
 
 module.exports = router;
