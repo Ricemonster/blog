@@ -11,6 +11,13 @@ router.delete('/',async function(req,res,next){
   let rss = await BlogController.Deleteblog(id);
   res.send(rss)
 })
+// ! 文章分页 - (page,limit)
+router.get('/:page/:limit',async function(req,res,next){
+  let page = req.params.page
+  let limit = req.params.limit
+  res.send(await BlogController.getList(page,limit))
+})
+
 
 
 
