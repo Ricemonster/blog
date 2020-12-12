@@ -39,24 +39,14 @@ class BlogController{
         })
         return success
     }
-    async getList(page,limit){
-        let allPage = await (await BlogSchema.find()).length
-        if((allPage / limit)<1){
-            allPage = 1
-        }else{
-            allPage = allPage / limit
+    async getList(page,limitaa){
+        let strat = (Number(page)-1)*Number(limitaa) // 开始的数据下标
+        let all = await (await BlogSchema.find()).length
+        let res = await BlogSchema.find().skip(strat).limit(Number(limitaa)).exec()
+        return {
+            all,
+            res
         }
-        console.log(allPage)
-        // let res = await BlogSchema.find()
-        // .sort({add_time:-1}) //按数据排序
-        // .skip((page-1)*limit)
-        // .limit(limit) //若最后一页剩余文章数不足limit个数时，只显示剩余的，不会报错。
-        // .exec(function(err, ret){
-        //     return (err,ret)
-        // })
-        // skip的第一个参数是跳过多少数据 比如第一页的20个数据
-        let res = await BlogSchema.find().sort({add_time:-1}).skip((page-1)*limit)
-        return res
     }
 
 }

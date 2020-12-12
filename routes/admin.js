@@ -22,17 +22,20 @@ router.post('/login',function(req,res,next){
         })
     }
 })
-
-
-
 // 文章渲染
 router.get('/index',function(req,res,next){
     res.render('admin/index')
 })
-router.get('/allblog',function(req,res,next){
-    BlogController.index().then(resa=>{
-      res.render('admin/order-list',{list:resa})
-    })
+router.get('/allblog',async function(req,res,next){
+
+    if(req.params.page !== undefined){
+        // let resa = await BlogController.getList(1,15)
+        res.render('admin/order-list',{list:resa.res,all:resa.all})
+    }else{
+       let resa = await BlogController.getList(1,15)
+       console.log(resa)
+       res.render('admin/order-list',{list:resa.res,all:resa.all})
+    }
 })  
 router.get('/createbook',function(req,res,next){
     res.render('admin/createbook')
