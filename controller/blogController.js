@@ -41,11 +41,13 @@ class BlogController{
     }
     async getList(page,limitaa){
         let strat = (Number(page)-1)*Number(limitaa) // 开始的数据下标
-        let all = await (await BlogSchema.find()).length
-        let res = await BlogSchema.find().skip(strat).limit(Number(limitaa)).exec()
+        let allNumber = await (await BlogSchema.find()).length
+        // 计算总页数
+        let totalPage = allNumber % limitaa == 0 ? allNumber / limitaa : Math.ceil(allNumber / limitaa)
+        let data = await BlogSchema.find().skip(strat).limit(Number(limitaa)).exec()
         return {
-            all,
-            res
+            totalPage,
+            data
         }
     }
 

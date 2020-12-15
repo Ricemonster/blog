@@ -7,10 +7,10 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="../css/font.css">
-        <link rel="stylesheet" href="../css/xadmin.css">
-        <script src="../lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="../js/xadmin.js"></script>
+        <link rel="stylesheet" href="/css/font.css">
+        <link rel="stylesheet" href="/css/xadmin.css">
+        <script src="/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/js/xadmin.js"></script>
         <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
     </head>
     
@@ -41,6 +41,7 @@
                                     <tr>
                                         <th>
                                             <input type="checkbox" name="" lay-skin="primary">
+                                            序列
                                         </th>
                                         <th>文章ID</th>
                                         <th>文章标题</th>
@@ -51,11 +52,10 @@
                                       </tr>
                                 </thead>
                                 <tbody>
-                                    <%list.forEach(function(item){
+                                    <%list.forEach(function(item,index){
                                         %>
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" name="" lay-skin="primary"></td>
+                                            <td><input type="checkbox" name="" lay-skin="primary"><%= index+1 %></td>
                                                 <td><%= item._id %></td>
                                                 <td style="font-weight: bold;"><%= item.title %></td>
                                                 <td><img src="<%= item.imgUrl %>" alt=""></td>
@@ -75,10 +75,11 @@
                             <div class="page">
                                 <div>
                                     <a class="prev" href="">&lt;&lt;</a>
-                                    <a class="num" href="">1</a>
-                                    <span class="current">2</span>
-                                    <a class="num" href="">3</a>
-                                    <a class="num" href="">489</a>
+                                    <a class="num" href="/admin/allblog/1">1</a>
+                                    <!-- <span class="current">3</span>
+                                    <a class="num" href="">3</a> -->
+                                    
+                                    <a class="num" href="/admin/allblog/<%= all %>"><%= all %></a>
                                     <a class="next" href="">&gt;&gt;</a></div>
                             </div>
                         </div>
