@@ -29,7 +29,7 @@ router.get('/allblog/:page',async function(req,res,next){
     let nowpage = req.params.page
     let resa = await BlogController.getList(nowpage,15)
     // data就是分页的数据,all是所有数据的数目
-    res.render('admin/order-list',{list:resa.data,all:resa.totalPage})
+    res.render('admin/order-list',{list:resa.data,allpage:resa.totalPage,nowpage:nowpage})
 })  
 router.get('/createbook',function(req,res,next){
     res.render('admin/createbook')

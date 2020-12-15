@@ -75,12 +75,18 @@
                             <div class="page">
                                 <div>
                                     <a class="prev" href="">&lt;&lt;</a>
-                                    <a class="num" href="/admin/allblog/1">1</a>
-                                    <!-- <span class="current">3</span>
-                                    <a class="num" href="">3</a> -->
-                                    
-                                    <a class="num" href="/admin/allblog/<%= all %>"><%= all %></a>
-                                    <a class="next" href="">&gt;&gt;</a></div>
+                                    <% if(Number(nowpage) === 1){ %>
+                                        <span class="current">1</span>
+                                    <% } else { %>
+                                        <a class="num" href="/admin/allblog/1">1</a>
+                                    <% } %>
+                                    <% if(Number(allpage) === Number(nowpage)){ %>
+                                        <span class="current"><%= allpage %></span>
+                                    <% } else { %>
+                                        <a class="num" href="/admin/allblog/<%= allpage %>"><%= allpage %></a>
+                                    <% } %>
+                                    <a class="next" href="">&gt;&gt;</a>
+                                </div>
                             </div>
                         </div>
                     </div>
