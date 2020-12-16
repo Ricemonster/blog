@@ -29,14 +29,14 @@
         display: none !important;
       }
       @font-face {
-      font-family: 'iconfont';  /* project id 2235655 */
-      src: url('//at.alicdn.com/t/font_2235655_76262c40ut.eot');
-      src: url('//at.alicdn.com/t/font_2235655_76262c40ut.eot?#iefix') format('embedded-opentype'),
-      url('//at.alicdn.com/t/font_2235655_76262c40ut.woff2') format('woff2'),
-      url('//at.alicdn.com/t/font_2235655_76262c40ut.woff') format('woff'),
-      url('//at.alicdn.com/t/font_2235655_76262c40ut.ttf') format('truetype'),
-      url('//at.alicdn.com/t/font_2235655_76262c40ut.svg#iconfont') format('svg');
-    }
+        font-family: 'iconfont';  /* project id 2235655 */
+        src: url('//at.alicdn.com/t/font_2235655_93t1k6j0tyg.eot');
+        src: url('//at.alicdn.com/t/font_2235655_93t1k6j0tyg.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_2235655_93t1k6j0tyg.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_2235655_93t1k6j0tyg.woff') format('woff'),
+        url('//at.alicdn.com/t/font_2235655_93t1k6j0tyg.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_2235655_93t1k6j0tyg.svg#iconfont') format('svg');
+        }
       .iconfont{
         font-family:"iconfont" !important;
         font-size:16px;font-style:normal;
@@ -98,21 +98,26 @@
     <div class="gcse-search"></div>
     <div class="pagination">
         <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
-            <i class="material-icons iconfont">
-              &#xe678;
-            </i>
+            <i class="material-icons iconfont">&#xe611;</i>
         </a>
         <div class="pagination-indicator">
             <span style="text-align: center">
-                1<br><div style="display: inline-block; transform: rotate(-28deg)">-</div><br>47
+                <%= nowpage %> <br><div style="display: inline-block; transform: rotate(-28deg)">-</div><br><%= allpage %> 
             </span>
         </div>
-        <a class="pagination-action" href="/zht/page/2/">
-            <i class="material-icons iconfont">
-              &#xe605;
-            </i>
+        <!-- 上一页 -->
+        <% if(1 < Number(nowpage)){%>
+            <a class="pagination-action" href="/<%= Number(nowpage) - 1 %>">
+                <i class="material-icons iconfont">&#xe612;</i>
+            </a>
+        <% }%>
+        <!-- 下一页 -->
+        <% if(1 !== Number(allpage) && Number(nowpage) !== Number(allpage)){%>
+        <a class="pagination-action" href="/<%= Number(nowpage) + 1 %>">
+            <i class="material-icons iconfont">&#xe605;</i>
         </a>
-          </div>
+        <% }%>
+    </div>
   </div>
   <!-- ? PC端边界 -->
 
@@ -122,7 +127,7 @@
     <div class="drawer-content">
         <div class="drawer-menu">
             
-            <script async src="js/cse.js"></script>
+            <script async src="/js/cse.js"></script>
             <div class="gcse-search" mobileLayout="true"></div>
             
             
@@ -272,7 +277,6 @@
       </div>
     </div>
   </div>
-
 <div class="pagination">
     
     <a class="pagination-action" style="opacity:0">
@@ -283,7 +287,7 @@
     </a>
 
         <div class="pagination-indicator">
-            <span>1/47</span>
+            <span>1/42</span>
         </div>
 
         
@@ -294,8 +298,6 @@
                 </i>
             </a>
 </div>
-
-
 <div id="single-column-footer"><div id="theme-info" style="display: none;">
 	
 	Theme modified from <a href="https://github.com/amazingrise/hugo-theme-diary" target="_blank" rel="noreferrer noopener">Diary</a> by <a href="https://amazingrise.net" target="_blank" rel="noreferrer noopener">Rise</a>
@@ -306,10 +308,9 @@
 	
 </div>
 &copy;
-	
-	2007-2020 BYVoid
+	2020-2020 Ricemonster
 	 (<a href="#" onclick="document.getElementById('theme-info').style=''">Diary</a>)</div>
     	</div>
-    <script src="js/journal.js"></script>
+    <script src="/js/journal.js"></script>
   </body>
 </html>

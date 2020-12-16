@@ -3,15 +3,26 @@ var router = express.Router();
 const BlogController = require('../controller/blogController');
 
 /* GET home page. */
-// 获取所有博客
 router.get('/', async function(req, res, next) {
-  // awaite 返回的是 promise 所有需要 then 来接收
-  BlogController.index().then(resa=>{
-    res.render('index',{state:0,list:resa})
-  })
+  let resa = await BlogController.getList(1,15)
+  // list为博文列表,当前页和总页数
+  res.render('index',{state:0,list:resa.data,nowpage:1,allpage:resa.totalPage})
 });
+// 带分页的home page
+router.get('/:page',async function(req,res,next){
+  let nowpage = req.params.page
+  let resa = await BlogController.getList(nowpage,15)
+  res.render('index',{state:0,list:resa.data,nowpage:nowpage,allpage:resa.totalPage})
+})
+
+
+
+
+
+
+
 // 增加一篇博文
-router.post('/',function(req,res,next){
+router.post('/',async function(req,res,next){
   BlogController.AddArticles(req.body).then(resa=>{
     res.send(resa)
   })
