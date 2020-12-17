@@ -14,9 +14,11 @@ router.get('/:page',async function(req,res,next){
   let resa = await BlogController.getList(nowpage,15)
   res.render('index',{state:0,list:resa.data,nowpage:nowpage,allpage:resa.totalPage})
 })
-
-
-
+// 跳转到详情页面
+router.get('/detail/:detailId',async function(req,res,next){
+  let _id = req.params.detailId
+  res.render('detailpage')
+})
 
 
 

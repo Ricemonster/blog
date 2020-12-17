@@ -129,34 +129,12 @@
             
             <script async src="/js/cse.js"></script>
             <div class="gcse-search" mobileLayout="true"></div>
-            
-            
-            
-                
-                
-                
-                
-                
                 <a class="a-block drawer-menu-item false" href="/zht/blog/">
                     網誌
                 </a>
-                
-            
-                
-                
-                
-                
-                
                 <a class="a-block drawer-menu-item false" href="/zht/categories/">
                     分類
                 </a>
-                
-            
-                
-                
-                
-                
-                
                 <a class="a-block drawer-menu-item false" href="/zht/tags/">
                     標籤
                 </a>
@@ -251,7 +229,7 @@
       <% if (state === 0) { %>
         <%list.forEach(function(item){
           %>
-          <a href="/" class="a-block">
+          <a href="/detail/<%= item._id %>" class="a-block">
             <div class="post-item-wrapper">
                 <div class="post-item post-item-no-divider">
                     <div class="post-item-info-wrapper">
