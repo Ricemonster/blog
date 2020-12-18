@@ -97,32 +97,41 @@ e.create();
 </script>
 <!-- 表单处理模块 - 图片，文章标题 ，分类-->
 <script>
+function setTImea(){
+  let now = new Date();                                                                                                     
+  let year = now.getFullYear(); //得到年份
+  let month = now.getMonth();//得到月份
+  let date = now.getDate();//得到日期
+  month = month + 1;
+  if (month < 10) month = "0" + month;
+  if (date < 10) date = "0" + date;
+  let time = year + "-" + month +  "-" + date;    
+  return time
+}
 layui.use('form', function(){
 var form = layui.form;
   //监听提交
-
 form.on('submit(formDemo)', function(data){
     let title = data.field.title
-    // var now = new Date();                                                                                                     
-    // var year = now.getFullYear(); //得到年份
-    // var month = now.getMonth();//得到月份
-    // var date = now.getDate();//得到日期
-    // month = month + 1;
-    // if (month < 10) month = "0" + month;
-    // if (date < 10) date = "0" + date;
-    // let time = year + "-" + month + "-" + date;    
-    // 传递到后台
-    axios.post('http://localhost:3000/', {
-        title: title
-    })
-    .then(function (res) {
-      layer.alert("文章添加成功")
-    })
-    .catch(function (error) {
-      layer.alert(error)
-    });
-     //获取HTML格式内容
-    // console.log(e.getHTML(),time); 
+    let content =  e.getHTML()
+    if((content === '<p></p>')){
+      layer.alert("文章内容不能为空")
+    }else{
+      let time = setTImea()
+        // 传递到后台
+      axios.post('http://localhost:3000/', {
+          title: title,
+          intime: time,
+          content: content
+      })
+      .then(function (res) {
+        layer.alert("文章添加成功")
+      })
+      .catch(function (error) {
+        layer.alert(error)
+      });
+    }
+    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
    });
 });
 layui.use('upload', function(){
@@ -144,7 +153,7 @@ layui.use('upload', function(){
             }
         });
 });
-// 获取内容
+// 处理时间
 
 </script>
 </body>

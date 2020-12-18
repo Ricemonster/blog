@@ -7,7 +7,7 @@ const BlogSchema = new Schema({
     },
     // 文章创建时间
     intime:{
-        type: Date,
+        type: String,
         default: Date.now
     },
     // 封面图
@@ -17,7 +17,8 @@ const BlogSchema = new Schema({
     },
     // 文章内容
     content:{
-        type: String
+        type: String,
+        required: true
     },
     // 文章分类 - 作为外键
     category:{

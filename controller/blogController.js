@@ -1,14 +1,14 @@
 const BlogSchema = require('../models/Blog.js')
 class BlogController{
-    async index(){
-        let Blog =  await BlogSchema.find((res,err)=>{
+    // 获取文章详情
+    async findArticles(id){
+        let Blog =  await BlogSchema.find({_id:id},(res,err)=>{
             if(err){
                 return '查询失败'
             }else{
                 return res
             }
         })
-        // 返回的是 promise
         return Blog
     }
     async UpdateArticles(id){
@@ -23,7 +23,9 @@ class BlogController{
     async AddArticles(item){
         let articles = new BlogSchema({
             title: item.title, 
-            imgUrl: item.imgUrl
+            // imgUrl: item.imgUrl,
+            intime: item.intime,
+            content: item.content
         })
         let resa = await articles.save()
         return resa
