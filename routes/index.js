@@ -18,7 +18,7 @@ router.get('/:page',async function(req,res,next){
 router.get('/detail/:detailId',async function(req,res,next){
   let _id = req.params.detailId
   let resa = await BlogController.findArticles(_id)
-  res.render('detailpage',{data:resa,content:resa.content})
+  res.render('detailpage',{data:resa[0]})
 })
 
 

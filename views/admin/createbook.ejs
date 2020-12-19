@@ -15,7 +15,6 @@
     }
 </style>
 <body>
-
     <form class="layui-form" action="" style="margin-top:20px">
         <div class="layui-form-item">
           <label class="layui-form-label">输入框</label>
@@ -59,7 +58,7 @@ e.height='500px';  //高度
 //	{url:'/upload/img/153444.jpg', name:'153444.jpg', error:0},
 //	{url:'/upload/img/153445.jpg', name:'153445.jpg', error:'禁止该文件类型上传'}
 //]
-e.uploadUrl="/iceEditor/src/upload.php";
+// e.uploadUrl="/iceEditor/src/upload.php";
 
 //第三步：配置菜单（默认加载全部，无需配置）
 e.menu = [
@@ -126,6 +125,8 @@ form.on('submit(formDemo)', function(data){
       })
       .then(function (res) {
         layer.alert("文章添加成功")
+        // 文章清空
+        e.setValue('');
       })
       .catch(function (error) {
         layer.alert(error)

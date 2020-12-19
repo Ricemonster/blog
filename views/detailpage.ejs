@@ -119,12 +119,11 @@
 
             <div class="post-body-wrapper">
                 <div class="post-body">
-                  <%= content %>
-                <!-- <hr width="100%" id="EOF">
-                <p style="color:#777;">上次修改時間 2020-07-15</p> -->
-                    
-                </div>
+                  <div id="content-body"><%= data.content %></div>
                 
+                <hr width="100%" id="EOF">
+                <p style="color:#777;">上次修改時間 2020-07-15</p>
+                </div>                
                     <div class="post-related">
 
 
@@ -311,6 +310,17 @@ var disqus_identifier = '6hqdquvqa2';
 	2007-2020 BYVoid
 	 (<a href="#" onclick="document.getElementById('theme-info').style=''">Diary</a>)</div>
     	</div>
-    <script src="/js/byvoid/journal.js"></script>
+    <!-- <script src="/js/byvoid/joutnal.js"></script> -->
     </body>
+    <script>
+        // 获取内容                                            
+        $(function () {
+          let str = $("#content-body").text()
+          $("#content-body").text("")
+          let parser = new DOMParser()
+          let doc = parser.parseFromString(str,"text/xml");
+          let node = doc.getElementsByTagName('p')[0];
+          $('#content-body')[0].append(node);
+        })
+      </script>
 </html>
