@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>日本漫遊：安房鋸山</title>
+<title><%= data.title %> </title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="google-site-verification" content>
@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/css/zht.min.6b49e1966948d45bf2714d53645c3150c5aa66a005749cc7b1bb73ffb77d9977.css" media="screen">
 <script src="/js/table.js"></script>
 <script src="/js/toc.js"></script>
+<link rel="stylesheet" href="/css/github-markdown.css">
 <style>
   @font-face {
     font-family: 'iconfont';  /* project id 2235655 */
@@ -52,41 +53,42 @@
       font-size: 23px;
     }
   </style>
+  <!-- 文章CSS样式 -->
+  <style>
+    /* ul li 样式 */
+    .content-body p ul,ol li{
+      display: flex;
+      flex-direction: column;
+    }
+    .content-body p ul,ol li{
+      list-style-type:decimal;
+      list-style-position:inside;
+    }
+  </style>
 </head><body>
     	<div id="app">
     
 </div><div ref="extraContainer" class="extra-container">
     <div class="toc animated-visibility">
 	<div class="toc-content">
-
-		<center>目錄</center>
+		<center>目录</center>
 							<ul>
-						
 							<ul>
-						
-						
 								<li>
 				 					<a href="#%e9%ab%98%e8%bc%aa%e5%85%a5%e5%8f%a3%e5%92%8c%e9%96%89%e5%9c%92%e7%9a%84%e8%bf%aa%e5%a3%ab%e5%b0%bc" v-on:click="closeDrawer" id="高輪入口和閉園的迪士尼-nav">
 										 高輪入口和閉園的迪士尼
 									</a>
 								</li>
-						
 							</ul>
-						
 							</ul>
 							<ul>
-						
 							<ul>
-						
-						
 								<li>
 				 					<a href="#%e6%88%bf%e7%b8%bd%e5%8d%8a%e5%b3%b6%e4%b9%8b%e9%8b%b8%e5%b1%b1" v-on:click="closeDrawer" id="房總半島之鋸山-nav">
 										 房總半島之鋸山
 									</a>
 								</li>
-						
 							</ul>
-						
 							</ul>
 	</div>
 </div>
@@ -103,10 +105,10 @@
         <div class="post">
             <div class="post-head-wrapper" style="background-image: url('images/nokogiri-buddha.jpeg')">
                 <div class="post-title">
-                    日本漫遊：安房鋸山
+                    <%= data.title %> 
                     <div class="post-meta">
                         <time itemprop="datePublished">
-                            2020-07-15 23:42
+                            <%= data.intime %>
                         </time>
                             <i class="material-icons" style>folder</i>
                                 <a href="/zht/categories/">[世界之旅]</a>
@@ -119,15 +121,15 @@
 
             <div class="post-body-wrapper">
                 <div class="post-body">
-                  <div id="content-body"><%= data.content %></div>
-                
+                  <!-- 文章详情 -->
+                  <div class="markdown-body"><%= data.content %></div>
                 <hr width="100%" id="EOF">
-                <p style="color:#777;">上次修改時間 2020-07-15</p>
+                <p style="color:#777;">上次修改时间 2020-07-15</p>
                 </div>                
                     <div class="post-related">
 
 
-    <h3>相關日誌</h3>
+    <h3>相关日志</h3>
     <ul>
 	   
 	     <li>
@@ -313,14 +315,14 @@ var disqus_identifier = '6hqdquvqa2';
     <!-- <script src="/js/byvoid/joutnal.js"></script> -->
     </body>
     <script>
-        // 获取内容                                            
+        // 获取内容,并把text渲染为dom结构                                            
         $(function () {
-          let str = $("#content-body").text()
-          $("#content-body").text("")
+          let str = $(".markdown-body").text()
+          $(".markdown-body").text("")
           let parser = new DOMParser()
           let doc = parser.parseFromString(str,"text/xml");
           let node = doc.getElementsByTagName('p')[0];
-          $('#content-body')[0].append(node);
+          $('.markdown-body')[0].append(node);
         })
       </script>
 </html>

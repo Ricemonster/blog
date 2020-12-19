@@ -19,7 +19,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">输入框</label>
           <div class="layui-input-block">
-            <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            <input id="inputName" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
           </div>
         </div>
         <button style="margin-left:50px;margin-bottom:20px;" type="button" class="layui-btn" id="TextimgUrl">
@@ -127,6 +127,7 @@ form.on('submit(formDemo)', function(data){
         layer.alert("文章添加成功")
         // 文章清空
         e.setValue('');
+        // 文章标题清空
       })
       .catch(function (error) {
         layer.alert(error)

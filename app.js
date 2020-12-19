@@ -5,6 +5,7 @@ const createError = require('http-errors')
  ,cookieParser = require('cookie-parser')
  ,logger = require('morgan')
  ,bodyParser = require('body-parser')
+ ,formidable = require('formidable')
  
 
 // !连接数据库并使用
@@ -59,6 +60,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ! 配置图片上传
+app.post('/upload',function(req,res){
+  let form = new formidable.IncomingForm();
+  form.parse(req, function(error, fields, files){
+    // 读取文件流并写入到public/test.png
+    fs.writeFileSync('public/test.png', fs.readFileSync(files.upload.path));
+    //重定向到结果页
+    // res.redirect('/public/result.html');
+  })
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
