@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+// ? 请求拦截
 // ! 登录拦截器
 app.use(cookieParser())
 app.use(function(req,res,next){
@@ -35,6 +36,7 @@ app.use(function(req,res,next){
   }
   next();
 })
+
 // ! 路由分发
 // 路由导入
 const indexRouter = require('./routes/index'); // 首页
@@ -42,7 +44,8 @@ const blogRouter = require('./routes/blog'); // 网志
 const categoriesRouter = require('./routes/categories'); // 分类
 const tagsRouter = require('./routes/tags'); // 标签
 const aboutmeRouter = require('./routes/aboutme'); // 关于我
-const adminRouter = require('./routes/admin') // 后台路由
+const adminRouter = require('./routes/admin'); // 后台路由
+const uploadRouter = require('./routes/uploads'); // 上传资源路由
 // 路由注册
 app.use('/', indexRouter);
 app.use('/blog', blogRouter);
@@ -50,6 +53,7 @@ app.use('/categories',categoriesRouter);
 app.use('/tags',tagsRouter);
 app.use('/about',aboutmeRouter);
 app.use('/admin',adminRouter);
+app.use('/uploads',uploadRouter)
 
 // ! ejs模板引擎
 app.set('views', path.join(__dirname, 'views'));
@@ -60,22 +64,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// ! 配置图片上传
-app.post('/upload',function(req,res){
-  let form = new formidable.IncomingForm();
-  form.parse(req, function(error, fields, files){
-    // 读取文件流并写入到public/test.png
-    fs.writeFileSync('public/test.png', fs.readFileSync(files.upload.path));
-    //重定向到结果页
-    // res.redirect('/public/result.html');
-  })
-})
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -2,6 +2,7 @@
 var router = express.Router();
 const BlogController = require('../controller/blogController');
 
+// 访问错误,没有就会出错 /index
 router.get('/',function(req,res,next){
     res.render('admin/login')
 })
