@@ -3,7 +3,7 @@
  * */
 const multer = require('multer')
 const path = require('path')
-
+let imgUrl = ''
 let tools = {
     // 上传图片模块
     multer(){
@@ -18,10 +18,11 @@ let tools = {
                 let extname = path.extname(file.originalname)
                 // 2.根据时间戳生成文件名
                 cb(null,Date.now()+extname)
+                imgUrl = Date.now()+extname
             }
         })
         let upload = multer({storage:storage})
-        return upload;
+        return {upload,imgUrl};
     }
 }
 

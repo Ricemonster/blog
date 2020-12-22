@@ -23,7 +23,7 @@ class BlogController{
     async AddArticles(item){
         let articles = new BlogSchema({
             title: item.title, 
-            // imgUrl: item.imgUrl,
+            imgUrl: item.imgUrl,
             intime: item.intime,
             content: item.content
         })

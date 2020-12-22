@@ -22,7 +22,6 @@
 <!--      <input type="submit" value="上传" />-->
 <!--  </form>-->
 <!--测试用例-->
-
   <form class="layui-form" action="" style="margin-top:20px">
     <div class="layui-form-item">
       <label class="layui-form-label">输入框</label>
@@ -38,7 +37,7 @@
     <div style="margin-top:30px;" class="layui-form-item">
         <div class="layui-input-block">
           <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          <button type="reset" class="layui-btn layui-btn-primary" id="reset">重置</button>
         </div>
       </div>
   </form>
@@ -123,42 +122,50 @@ var form = layui.form;
 form.on('submit(formDemo)', function(data){
     //  处理表单数据
     let formData = new FormData();
-    formData.append('title', data.field.title);
-    formData.append('content', e.getHTML());
-    formData.append('intime', setTImea());
-    formData.append('pic',$("#pic")[0].files[0])
+        formData.append('title', data.field.title);
+        formData.append('content', e.getHTML());
+        formData.append('intime', setTImea());
+        formData.append('pic',$("#pic")[0].files[0])
     let config = {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     }
     //https://www.jb51.net/article/118051.htm 继续完成工作
-    axios.post('/uploads/index',formData,config).then(function (res) {
-        alert(res)
-    })
-    //
+
     // let title = data.field.title
     // let content =  e.getHTML()
-    // if((content === '<p></p>')){
-    //   layer.alert("文章内容不能为空")
-    // }else{
-    //   let time = setTImea()
-    //     // 传递到后台
-    //   axios.post('http://localhost:3000/', {
-    //       title: title,
-    //       intime: time,
-    //       content: content
-    //   })
-    //   .then(function (res) {
-    //     layer.alert("文章添加成功")
-    //     // 文章清空
-    //     e.setValue('');
-    //     // 文章标题清空
-    //   })
-    //   .catch(function (error) {
-    //     layer.alert(error)
-    //   });
-    // }
+
+    if((e.getHTML() === '<p></p>')){
+      layer.alert("文章内容不能为空")
+    }else{
+        //具体的请求代码
+        axios.post('/uploads/index',formData,config).then(function (res) {
+              layer.alert("文章添加成功")
+              // 文章清空
+              e.setValue('');
+              // 文章标题清空
+              $("#reset").click()
+        }).catch(err=>{
+            layer.alert("文章添加失败")
+        })
+       // 以前的数据发送代码
+      // let time = setTImea()
+      // axios.post('http://localhost:3000/', {
+      //     title: title,
+      //     intime: time,
+      //     content: content
+      // })
+      // .then(function (res) {
+      //   layer.alert("文章添加成功")
+      //   // 文章清空
+      //   e.setValue('');
+      //   // 文章标题清空
+      // })
+      // .catch(function (error) {
+      //   layer.alert(error)
+      // });
+    }
     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
    });
 });
