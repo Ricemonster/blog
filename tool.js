@@ -14,7 +14,6 @@ let tools = {
             },
             // 修改上传后的文件名
             filename:function (req,file,cb) {
-                console.log(file)
                 // 1.获取后缀名
                 let extname = path.extname(file.originalname)
                 // 2.根据时间戳生成文件名
