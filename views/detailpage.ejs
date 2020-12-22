@@ -103,7 +103,7 @@
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
-            <div class="post-head-wrapper" style="background-image: url('images/nokogiri-buddha.jpeg')">
+            <div class="post-head-wrapper" style="background-image: url(<%= data.imgUrl %>)">
                 <div class="post-title">
                     <%= data.title %> 
                     <div class="post-meta">
@@ -112,7 +112,6 @@
                         </time>
                             <i class="material-icons" style>folder</i>
                                 <a href="/zht/categories/">[世界之旅]</a>
-                                &nbsp;
                     <i class="material-icons">language</i>
                     <a href="https://byvoid.com/zhs/blog/jp-roaming-aha-nokogiri/">簡體版</a>
                 </div>

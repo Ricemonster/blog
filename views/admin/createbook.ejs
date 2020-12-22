@@ -133,8 +133,6 @@ form.on('submit(formDemo)', function(data){
     }
     //https://www.jb51.net/article/118051.htm 继续完成工作
 
-    // let title = data.field.title
-    // let content =  e.getHTML()
 
     if((e.getHTML() === '<p></p>')){
       layer.alert("文章内容不能为空")
@@ -149,22 +147,6 @@ form.on('submit(formDemo)', function(data){
         }).catch(err=>{
             layer.alert("文章添加失败")
         })
-       // 以前的数据发送代码
-      // let time = setTImea()
-      // axios.post('http://localhost:3000/', {
-      //     title: title,
-      //     intime: time,
-      //     content: content
-      // })
-      // .then(function (res) {
-      //   layer.alert("文章添加成功")
-      //   // 文章清空
-      //   e.setValue('');
-      //   // 文章标题清空
-      // })
-      // .catch(function (error) {
-      //   layer.alert(error)
-      // });
     }
     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
    });

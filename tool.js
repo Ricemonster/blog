@@ -16,9 +16,10 @@ let tools = {
             filename:function (req,file,cb) {
                 // 1.获取后缀名
                 let extname = path.extname(file.originalname)
-                // 2.根据时间戳生成文件名
-                cb(null,Date.now()+extname)
+                // 2.统一生成图片名
                 imgUrl = Date.now()+extname
+                // 3.存储
+                cb(null,imgUrl)
             }
         })
         let upload = multer({storage:storage})
