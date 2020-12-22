@@ -5,9 +5,6 @@ const createError = require('http-errors')
  ,cookieParser = require('cookie-parser')
  ,logger = require('morgan')
  ,bodyParser = require('body-parser')
- ,formidable = require('formidable')
- 
-
 // !连接数据库并使用
 const mongoose = require('mongoose')
 require('dotenv').config() // 加载环境变量

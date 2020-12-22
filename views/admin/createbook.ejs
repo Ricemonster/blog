@@ -8,27 +8,21 @@
 </head>
 <style>
     .blogtitle{
-        margin-top: 20px;
+        margin-top: 20px;/upload/${file.name}
     }
     .layui-input-block{
         width: 70%;
     }
 </style>
 <body>
-  <!-- ! 测试上传 -->
-  <form action="/uploads/index" method="post" enctype="multipart/form-data" class="form-horizontal">
-    <div class="form-group">
-       <input type="text" class="form-control"  name="tit" placeholder="标题">
-    </div>
-    <div class="form-group">
-        <textarea rows="" cols="" class="form-control" name="con"  placeholder="内容"></textarea>
-    </div>
-    <div>
-      <input type="file" name="pic" />
-    </div>
-    <button type="submit" class="btn btn-default">提交</button> 
-  </form>
-  <!-- ! 测试上传 -->
+<!--测试用例-->
+<!--  <form action="/uploads/index" method="post" enctype="multipart/form-data">-->
+<!--     标题： <input type="text" name="title" id="title" />-->
+<!--      图片：<input type="file" name="pic" id="pic" />-->
+<!--      <input type="submit" value="上传" />-->
+<!--  </form>-->
+<!--测试用例-->
+
   <form class="layui-form" action="" style="margin-top:20px">
     <div class="layui-form-item">
       <label class="layui-form-label">输入框</label>
@@ -36,9 +30,10 @@
         <input id="inputName" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
       </div>
     </div>
-    <button style="margin-left:50px;margin-bottom:20px;" type="button" class="layui-btn" id="test1">
-        <i class="layui-icon">&#xe67c;</i>上传封面图
-    </button>
+    <div style="display: flex;flex-direction: row;align-items: center;">
+        <label class="layui-form-label">文章封面</label>
+        <input id="pic" type="file" name="pic" required  lay-verify="required" >
+    </div>
     <div style="margin-left: 50px;" id="editor"></div>
     <div style="margin-top:30px;" class="layui-form-item">
         <div class="layui-input-block">
@@ -126,7 +121,28 @@ layui.use('form', function(){
 var form = layui.form;
   //监听提交
 form.on('submit(formDemo)', function(data){
-  console.log('提交图片')
+    //  处理表单数据
+    let formData = new FormData();
+    formData.append('title', data.field.title);
+    formData.append('content', e.getHTML());
+    formData.append('intime', setTImea());
+    formData.append('pic',$("#pic")[0].files[0])
+    let config = {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }
+    //https://www.jb51.net/article/118051.htm 继续完成工作
+    axios.post('/uploads/index',formData,config).then(function (res) {
+        alert(res)
+    })
+
+
+
+
+
+
+
     let title = data.field.title
     let content =  e.getHTML()
     if((content === '<p></p>')){
