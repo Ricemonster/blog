@@ -314,14 +314,18 @@ var disqus_identifier = '6hqdquvqa2';
     <!-- <script src="/js/byvoid/joutnal.js"></script> -->
     </body>
     <script>
-        // 获取内容,并把text渲染为dom结构                                            
+        <!-- 生成DOM对象 -->
+        function parseDom(arg) {
+            var objE = document.createElement("div");
+            objE.innerHTML = arg;
+            return objE.childNodes;
+        };
+        // 获取内容,并把text渲染为dom结构
         $(function () {
-          let str = $(".markdown-body").text()
-          $(".markdown-body").text("")
-          let parser = new DOMParser()
-          let doc = parser.parseFromString(str,"text/xml");
-          let node = doc.getElementsByTagName('p')[0];
-          $('.markdown-body')[0].append(node);
+            let str = $(".markdown-body").text()
+            $(".markdown-body").text("")
+            let obj = parseDom(str);
+            $('.markdown-body').append(obj);
         })
       </script>
 </html>
