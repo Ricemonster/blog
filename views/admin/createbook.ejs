@@ -110,10 +110,14 @@ function setTImea(){
   let year = now.getFullYear(); //得到年份
   let month = now.getMonth();//得到月份
   let date = now.getDate();//得到日期
+  let hour = now.getHours(); //得到小时
+  let minute = now.getMinutes() //得到分钟
   month = month + 1;
   if (month < 10) month = "0" + month;
   if (date < 10) date = "0" + date;
-  let time = year + "-" + month +  "-" + date;    
+  if (hour < 10) hour = "0" + hour;
+  if (minute < 10) minute = "0" + minute;
+  let time = year + "-" + month +  "-" + date + "  " + hour + ":" + minute;
   return time
 }
 layui.use('form', function(){

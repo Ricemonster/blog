@@ -40,7 +40,6 @@ const indexRouter = require('./routes/index'); // 首页
 const blogRouter = require('./routes/blog'); // 网志
 const categoriesRouter = require('./routes/categories'); // 分类
 const tagsRouter = require('./routes/tags'); // 标签
-const aboutmeRouter = require('./routes/aboutme'); // 关于我
 const adminRouter = require('./routes/admin'); // 后台路由
 const uploadRouter = require('./routes/upload'); // 上传资源路由
 // 路由注册
@@ -48,7 +47,6 @@ app.use('/', indexRouter);
 app.use('/blog', blogRouter);
 app.use('/categories',categoriesRouter);
 app.use('/tags',tagsRouter);
-app.use('/about',aboutmeRouter);
 app.use('/admin',adminRouter);
 app.use('/uploads',uploadRouter)
 
