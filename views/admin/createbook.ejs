@@ -135,23 +135,23 @@ form.on('submit(formDemo)', function(data){
             'Content-Type': 'multipart/form-data'
         }
     }
+    console.log(e.getHTML())
     //https://www.jb51.net/article/118051.htm 继续完成工作
 
-
-    if((e.getHTML() === '<p></p>')){
-      layer.alert("文章内容不能为空")
-    }else{
-        //具体的请求代码
-        axios.post('/uploads/index',formData,config).then(function (res) {
-              layer.alert("文章添加成功")
-              // 文章清空
-              e.setValue('');
-              // 文章标题清空
-              $("#reset").click()
-        }).catch(err=>{
-            layer.alert("文章添加失败")
-        })
-    }
+    // if((e.getHTML() === '<p></p>')){
+    //   layer.alert("文章内容不能为空")
+    // }else{
+    //     //具体的请求代码
+    //     axios.post('/uploads/index',formData,config).then(function (res) {
+    //           layer.alert("文章添加成功")
+    //           // 文章清空
+    //           e.setValue('');
+    //           // 文章标题清空
+    //           $("#reset").click()
+    //     }).catch(err=>{
+    //         layer.alert("文章添加失败")
+    //     })
+    // }
     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
    });
 });
