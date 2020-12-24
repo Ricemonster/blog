@@ -11,13 +11,22 @@ router.delete('/',async function(req,res,next){
   let rss = await BlogController.Deleteblog(id);
   res.send(rss)
 })
-// ! 文章分页 - (page,limit)
-router.get('/:page/:limit',async function(req,res,next){
-  let page = req.params.page
-  let limit = req.params.limit
-  res.send(await BlogController.getList(page,limit))
+//blog的分页组件
+router.get('/:page',async function(req,res,next) {
+  let nowpage = req.params.page
+  let resa = await BlogController.Datafind(nowpage)
+  // 获取当前年份
+  let now = new Date();
+  let year = now.getFullYear() + ''; //得到年份
+  for(let i=0;i<resa.data.length;i++) {
+    let time = resa.data[i].intime.slice(0, 4)
+    if(year === time){
+      resa.data.splice(i,0,{ year:true,title:year })
+      year -= 1
+    }
+  }
+  res.render('blog',{list:resa.data,nowpage:nowpage,allpage:resa.totalPage})
 })
-
 
 
 

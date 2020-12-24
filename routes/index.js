@@ -12,7 +12,7 @@ router.get('/', async function(req, res, next) {
 router.get('/:page',async function(req,res,next){
   let page = req.params.page
   if(page === 'about'){
-    let resa = await BlogController.findArticles('5fe2bc5603b9a03b28d54a6b')
+    let resa = await BlogController.findArticles('5fe3f37751496c282c93e403')
     res.render('about',{data:resa[0]})
   }else{
     let nowpage = req.params.page
@@ -24,6 +24,7 @@ router.get('/:page',async function(req,res,next){
 router.get('/detail/:detailId',async function(req,res,next){
   let _id = req.params.detailId
   let resa = await BlogController.findArticles(_id)
+  console.log(resa)
   res.render('detailpage',{data:resa[0]})
 })
 
