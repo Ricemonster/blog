@@ -28,9 +28,6 @@ router.get('/detail/:detailId',async function(req,res,next){
   res.render('detailpage',{data:resa[0]})
 })
 
-
-
-
 // 增加一篇博文
 router.post('/',async function(req,res,next){
   BlogController.AddArticles(req.body).then(resa=>{

@@ -33,7 +33,8 @@
             <hr class="hr20" >
         </form>
     </div>
-
+<!--  判断当前环境  -->
+    <script src="/js/deenv.js"></script>
     <script>
         $(function  () {
             layui.use('form', function(){
@@ -43,7 +44,7 @@
               //   });
               //监听提交
               form.on('submit(login)', function(data){
-                axios.post('http://localhost:3000/admin/login', {
+                axios.post(`${nowUrl}/admin/login`, {
                   userName: data.field.username,
                   passWord: data.field.password
                 })
